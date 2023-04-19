@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import sys
 
 # lê o arquivo .pgm
 def readPgm(name):
@@ -39,16 +40,20 @@ def imgAlloc(nl, nc):
         img.append(lin)
     return img
 
+# armazenando os argumentos
+lista_args = sys.argv[1:]
+
 # leitura da imagem .pgm
-img = readPgm('img.pgm')
+nome_imagem = lista_args[0]
+img = readPgm(nome_imagem)
 
 # número de linhas e colunas antes de redimensionar
 nl = len(img)
 nc = len(img[0])
 
 # novos valores para número de linhas e colunas da matriz
-novo_num_lins = 85
-novo_num_cols = 128
+novo_num_cols = int(lista_args[1])
+novo_num_lins = int(lista_args[2])
 
 # alocando nova espaço para a imagem redimensionada
 imagem = imgAlloc(novo_num_lins, novo_num_cols)
@@ -60,21 +65,21 @@ razao_cols = nc // novo_num_cols
 # x e y sao variáveis que auxiliam a redimensionar a imagem, elas são incrementados pelo valor da razão calculada acima
 x = 0
 for i in range(novo_num_lins):
-    x += razao_lins
     y = 0
     for j in range(novo_num_cols):
         imagem[i][j] = img[x][y]
         y += razao_cols
+    x += razao_lins
 
 # visualização de como ficou a imagem redimensionada
-#plt.imshow(imagem, cmap='gray')
-#plt.show()
+plt.imshow(imagem, cmap='gray')
+plt.show()
 
 # alocando uma matriz para a imagem de saída
 saida = imgAlloc(novo_num_lins, novo_num_cols)
 
-# caracteres a serem usados
-str = "@$#*%o!=+;:~=,. "
+# caracteres a serem usados, como por exemplo: "@$#*%o!=+;:~=,. "
+str = lista_args[3]
 
 # tamanho da string passada
 tam_str = len(str)
@@ -96,3 +101,4 @@ with open('result.txt', 'w') as resultado:
     for linha in saida:
         resultado.write(''.join(linha))
         resultado.write('\n')
+
