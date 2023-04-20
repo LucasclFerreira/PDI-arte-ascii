@@ -1,3 +1,16 @@
+"""
+   ==============================================================
+   * UNIFAL = Universidade Federal de Alfenas
+   * BACHARELADO EM CIENCIA DA COMPUTACAO.
+   * Trabalho....: Imagem ASCII
+   * Disciplina..: Processamento de Imagens
+   * Professor...: Luiz Eduardo da Silva
+   * Aluno.......: Lucas Costa Lima Ferreira
+   * Data........: 20/04/2023
+   ==============================================================
+"""
+
+# Comando para executar: python3 arte_ascii.py cao.pgm 100 30 "@$#*%o!=+;:~=,. "
 import matplotlib.pyplot as plt
 import sys
 
