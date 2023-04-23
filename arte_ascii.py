@@ -13,6 +13,7 @@
 # Comando para executar: python3 arte_ascii.py cao.pgm 100 30 "@$#*%o!=+;:~=,. "
 #import matplotlib.pyplot as plt
 import sys
+import math
 
 # lê o arquivo .pgm
 def readPgm(name):
@@ -55,8 +56,6 @@ def imgAlloc(nl, nc):
 
 # armazenando os argumentos
 lista_args = sys.argv[1:]
-for args in lista_args:
-    print(args)
 
 # leitura da imagem .pgm
 nome_imagem = lista_args[0]
@@ -105,7 +104,7 @@ for i in range(novo_num_lins):
 
         # escolhe o carácter a ser usado pelo índice
         # o código só funciona se a string ter caracteres "mais escuros" no incio e "mais claros" no final
-        indice = imagem[i][j] % tam_str
+        indice = math.trunc((imagem[i][j] / 255) * (tam_str - 1))
 
         # escreve o carácter na saída
         saida[i][j] = str[indice]
