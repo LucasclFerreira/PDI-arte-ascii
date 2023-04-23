@@ -11,7 +11,7 @@
 """
 
 # Comando para executar: python3 arte_ascii.py cao.pgm 100 30 "@$#*%o!=+;:~=,. "
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import sys
 
 # lê o arquivo .pgm
@@ -55,6 +55,8 @@ def imgAlloc(nl, nc):
 
 # armazenando os argumentos
 lista_args = sys.argv[1:]
+for args in lista_args:
+    print(args)
 
 # leitura da imagem .pgm
 nome_imagem = lista_args[0]
@@ -85,8 +87,8 @@ for i in range(novo_num_lins):
     x += razao_lins
 
 # visualização de como ficou a imagem redimensionada
-plt.imshow(imagem, cmap='gray')
-plt.show()
+#plt.imshow(imagem, cmap='gray')
+#plt.show()
 
 # alocando uma matriz para a imagem de saída
 saida = imgAlloc(novo_num_lins, novo_num_cols)
@@ -103,11 +105,12 @@ for i in range(novo_num_lins):
 
         # escolhe o carácter a ser usado pelo índice
         # o código só funciona se a string ter caracteres "mais escuros" no incio e "mais claros" no final
-        indice = imagem[i][j] // tam_str
+        indice = imagem[i][j] % tam_str
 
         # escreve o carácter na saída
         saida[i][j] = str[indice]
 
+print("TAM_STR: ", tam_str)
 # escreve a saída em um arquivo de texto para que seja possível visualizar o resultado
 # também é realizada a união de cada carácter de cada linha da matriz seguido de uma quebra de linha
 with open('result.txt', 'w') as resultado:
